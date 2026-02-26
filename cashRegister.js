@@ -15,9 +15,26 @@ const cashRegister = {
         } else {
             console.log(name + ' not found in items for sale')
         }
+    },
+    itemTotal: function(){
+        let total = 0;
+        this.shoppingCart.forEach(function(purchased){
+            total += purchased.price;
+        });
+        return total;
+    },
+    pay: function(cash){
+        let totalCashAmount = this.itemTotal();
+        if (cash >= totalCashAmount) {
+            console.log("Payment successful. Change: $" + (cash - totalCashAmount));
+        } else {
+            console.log("Insufficient funds.");
         }
     }
+};
 cashRegister.addItem('Phone');
 cashRegister.addItem('Console');
 cashRegister.addItem('Tablet');
 console.log(cashRegister.shoppingCart);
+console.log("Total: $" + cashRegister.itemTotal());
+cashRegister.pay(500);
